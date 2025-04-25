@@ -20,7 +20,7 @@ The appointment is blocked to send.
 
 Expected result
 ---------------
-The message is sent.
+The appointment is sent.
 
 Hardware
 --------
