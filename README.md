@@ -34,7 +34,4 @@ Outlook for Mac. Version 16.96.1 (25042021)
 
 Screenshots
 -----------
-![](/Screenshot3.png)
 ![](/Screenshot1.png)
-![](/Screenshot2.png)
-![](/Screenshot4.png)
