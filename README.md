@@ -1,6 +1,6 @@
 Prerequisites
 -------------
-Addin code is hosted on: https://danilkorotenko.github.io/OutlookAddin/index.html
+Addin code is hosted on: https://danilkorotenko.github.io/OutlookAddin_SimpleBlock/index.html
 
 [Manifest](/manifest.xml)
 
