@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OfficeApp
+    xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+    xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides"
+    xsi:type="MailApp">
+
+    <Id>3B57A99B-A42D-42D4-B37C-D539C61AB3FC</Id>
+    <Version>1.5</Version>
+    <ProviderName>ACME</ProviderName>
+    <DefaultLocale>en-us</DefaultLocale>
+    <DisplayName DefaultValue="Outlook Addin" />
+    <Description DefaultValue="Outlook Addin" />
+
+    <IconUrl DefaultValue="https://danilkorotenko.github.io/OutlookAddin/sample.png"/>
+    <HighResolutionIconUrl DefaultValue="https://danilkorotenko.github.io/OutlookAddin/sample.png"/>
+    <SupportUrl DefaultValue="https://github.com/DanilKorotenko/OutlookAddin"/>
+
+    <Hosts>
+        <Host Name="Mailbox" />
+    </Hosts>
+
+    <Requirements>
+        <Sets>
+            <Set Name="Mailbox" MinVersion="1.8" />
+        </Sets>
+    </Requirements>
+
+    <FormSettings>
+        <Form xsi:type="ItemEdit">
+            <DesktopSettings>
+                <!-- The JavaScript code should be hosted on a secure and trusted web server. -->
+                <SourceLocation DefaultValue="https://danilkorotenko.github.io/OutlookAddin/index.html" />
+            </DesktopSettings>
+        </Form>
+    </FormSettings>
+
+    <Permissions>ReadWriteMailbox</Permissions>
+
+    <Rule xsi:type="RuleCollection" Mode="Or">
+    	<Rule xsi:type="ItemIs" ItemType="Message" FormType="Edit" />
+    </Rule>
+
+    <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <!-- On Send requires VersionOverridesV1_1 -->
+    <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1" xsi:type="VersionOverridesV1_1">
+        <Description resid="residAppDescription" />
+        <Hosts>
+            <Host xsi:type="MailHost">
+                <DesktopFormFactor>
+                    <!-- The functionfile and function name to call on message send.  -->
+                    <!-- In this particular case the function validateMessage will be called within the JavaScript code referenced in addinServerUrl. -->
+                    <FunctionFile resid="addinServerUrl" />
+                    <ExtensionPoint xsi:type="Events">
+                        <Event Type="ItemSend" FunctionExecution="synchronous" FunctionName="validateMessage" />
+                    </ExtensionPoint>
+                </DesktopFormFactor>
+            </Host>
+        </Hosts>
+        <Resources>
+            <bt:Urls>
+                <!-- The JavaScript code is hosted on a secure and trusted web server. -->
+                <bt:Url id="addinServerUrl" DefaultValue="https://danilkorotenko.github.io/OutlookAddin/index.html" ></bt:Url>
+            </bt:Urls>
+        </Resources>
+    </VersionOverrides>
+    </VersionOverrides>
+</OfficeApp>

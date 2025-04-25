@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>No UI</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+
+    <script>
+
+let mailboxItem;
+
+Office.initialize = function (reason)
+{
+    console.log("*******************************************************");
+    console.log("Office.initialize");
+    mailboxItem = Office.context.mailbox.item;
+}
+
+function validateMessage(event)
+{
+    console.log("Start validation stream");
+
+    mailboxItem.notificationMessages.addAsync('NoSend',
+        { type: 'errorMessage',
+        message: 'Message blocked.' });
+            
+    event.completed({ allowEvent: false });
+    return;
+}
+
+    </script>
+</head>
+<body>
+    This page is left blank intentionally.
+</body>
+</html>
