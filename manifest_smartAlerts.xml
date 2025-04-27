@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OfficeApp
+    xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+    xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides"
+    xsi:type="MailApp">
+
+    <Id>3B57A99B-A42D-42D4-B37C-D539C61AB3FC</Id>
+    <Version>1.5</Version>
+    <ProviderName>ACME</ProviderName>
+    <DefaultLocale>en-us</DefaultLocale>
+    <DisplayName DefaultValue="Outlook Addin" />
+    <Description DefaultValue="Outlook Addin" />
+
+    <IconUrl DefaultValue="https://danilkorotenko.github.io/OutlookAddin_SimpleBlock/sample.png"/>
+    <HighResolutionIconUrl DefaultValue="https://danilkorotenko.github.io/OutlookAddin_SimpleBlock/sample.png"/>
+    <SupportUrl DefaultValue="https://github.com/DanilKorotenko/OutlookAddin_SimpleBlock"/>
+
+    <Hosts>
+        <Host Name="Mailbox" />
+    </Hosts>
+
+    <Requirements>
+        <Sets>
+            <Set Name="Mailbox" MinVersion="1.8" />
+        </Sets>
+    </Requirements>
+
+    <FormSettings>
+        <Form xsi:type="ItemEdit">
+            <DesktopSettings>
+                <!-- The JavaScript code should be hosted on a secure and trusted web server. -->
+                <SourceLocation DefaultValue="https://danilkorotenko.github.io/OutlookAddin_SimpleBlock/index.html" />
+            </DesktopSettings>
+        </Form>
+    </FormSettings>
+    <Permissions>ReadWriteMailbox</Permissions>
+
+    <Rule xsi:type="RuleCollection" Mode="Or">
+        <Rule xsi:type="ItemIs" ItemType="Message" FormType="ReadOrEdit" />
+    </Rule>
+
+    <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1" xsi:type="VersionOverridesV1_1">
+        <Hosts>
+            <Host xsi:type="MailHost">
+                <Runtimes>
+                    <Runtime resid="indexUrl">
+                        <Override type="javascript" resid="runtimeUrl"/>
+                    </Runtime>
+                </Runtimes>
+                <DesktopFormFactor>
+                    <FunctionFile resid="indexUrl" />
+                    <ExtensionPoint xsi:type="LaunchEvent">
+                        <LaunchEvents>
+                            <LaunchEvent Type="OnMessageSend" FunctionName="validateMessage" SendMode="SoftBlock" />
+                        </LaunchEvents>
+                        <SourceLocation resid="indexUrl"/>
+                    </ExtensionPoint>
+                </DesktopFormFactor>
+            </Host>
+        </Hosts>
+        <Resources>
+            <bt:Urls>
+                <bt:Url id="indexUrl" DefaultValue="https://danilkorotenko.github.io/OutlookAddin_SimpleBlock/index.html" ></bt:Url>
+                <bt:Url id="runtimeUrl" DefaultValue="https://danilkorotenko.github.io/OutlookAddin_SimpleBlock/runtime.js" ></bt:Url>
+            </bt:Urls>
+        </Resources>
+    </VersionOverrides>
+    </VersionOverrides>
+</OfficeApp>
